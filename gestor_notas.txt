@@ -1,0 +1,282 @@
+Pseudocodigo
+INICIO
+
+    DEFINIR listas:
+        nombres ← []
+        notas ← []
+
+    PROCEDIMIENTO menu()
+        MIENTRAS VERDADERO HACER
+            MOSTRAR "====== GESTOR DE NOTAS ======"
+            MOSTRAR "1. Registrar nuevo curso"
+            MOSTRAR "2. Mostrar todos los cursos y notas"
+            MOSTRAR "3. Calcular promedio general"
+            MOSTRAR "4. Contar cursos aprobados y reprobados"
+            MOSTRAR "5. Buscar curso por nombre"
+            MOSTRAR "6. Actualizar nota de un curso"
+            MOSTRAR "7. Eliminar un curso"
+            MOSTRAR "8. Ordenar cursos por nota"
+            MOSTRAR "9. Ordenar cursos por nombre"
+            MOSTRAR "10. Buscar curso por nombre"
+            MOSTRAR "11. Salir"
+
+            LEER opcion
+
+            SI opcion = "1" ENTONCES
+                LLAMAR registrar_curso()
+            SINO SI opcion = "2" ENTONCES
+                LLAMAR mostrar_cursos()
+            SINO SI opcion = "3" ENTONCES
+                LLAMAR calcular_promedio()
+            SINO SI opcion = "4" ENTONCES
+                LLAMAR contar_aprobados_reprobados()
+            SINO SI opcion = "5" ENTONCES
+                LLAMAR buscar_curso_lineal()
+            SINO SI opcion = "6" ENTONCES
+                LLAMAR actualizar_nota()
+            SINO SI opcion = "7" ENTONCES
+                LLAMAR eliminar_curso()
+            SINO SI opcion = "8" ENTONCES
+                LLAMAR ordenar_por_nota()
+            SINO SI opcion = "9" ENTONCES
+                LLAMAR ordenar_por_nombre()
+            SINO SI opcion = "10" ENTONCES
+                LLAMAR buscar_curso_binario()
+            SINO SI opcion = "11" ENTONCES
+                MOSTRAR "Saliendo del sistema"
+                SALIR DEL BUCLE
+            SINO
+                MOSTRAR "Opción inválida."
+            FIN SI
+        FIN MIENTRAS
+    FIN PROCEDIMIENTO
+
+    PROCEDIMIENTO registrar_curso()
+        LEER nombre
+        SI nombre ∈ nombres ENTONCES
+            MOSTRAR "Este curso ya se ha registrado."
+        SINO
+            LEER nota
+            SI nota ≥ 0 Y nota ≤ 100 ENTONCES
+                AGREGAR nombre A nombres
+                AGREGAR nota A notas
+                MOSTRAR "El curso se registró con éxito."
+            SINO
+                MOSTRAR "La nota debe estar entre 0 y 100."
+            FIN SI
+        FIN SI
+    FIN PROCEDIMIENTO
+
+    PROCEDIMIENTO mostrar_cursos()
+        SI nombres está vacío ENTONCES
+            MOSTRAR "No hay cursos registrados."
+        SINO
+            PARA i DESDE 1 HASTA longitud(nombres)
+                MOSTRAR i, nombres[i], notas[i]
+            FIN PARA
+        FIN SI
+    FIN PROCEDIMIENTO
+
+    PROCEDIMIENTO calcular_promedio()
+        SI notas está vacío ENTONCES
+            MOSTRAR "No se han registrado cursos."
+        SINO
+            promedio ← SUMA(notas) / longitud(notas)
+            MOSTRAR "Promedio general:", promedio (2 decimales)
+        FIN SI
+    FIN PROCEDIMIENTO
+
+    PROCEDIMIENTO contar_aprobados_reprobados()
+        SI notas está vacío ENTONCES
+            MOSTRAR "No se han registrado cursos."
+        SINO
+            aprobados ← 0
+            reprobados ← 0
+            PARA cada nota EN notas
+                SI nota ≥ 60 ENTONCES
+                    aprobados ← aprobados + 1
+                SINO
+                    reprobados ← reprobados + 1
+                FIN SI
+            FIN PARA
+            MOSTRAR "Cursos aprobados:", aprobados
+            MOSTRAR "Cursos reprobados:", reprobados
+        FIN SI
+    FIN PROCEDIMIENTO
+
+    PROCEDIMIENTO buscar_curso_lineal()
+        LEER nombre
+        encontrado ← FALSO
+        PARA i DESDE 1 HASTA longitud(nombres)
+            SI nombre está contenido en nombres[i] ENTONCES
+                MOSTRAR "Curso encontrado:", nombres[i], "Nota:", notas[i]
+                encontrado ← VERDADERO
+                SALIR DEL BUCLE
+            FIN SI
+        FIN PARA
+        SI encontrado = FALSO ENTONCES
+            MOSTRAR "Curso no encontrado."
+        FIN SI
+    FIN PROCEDIMIENTO
+
+    PROCEDIMIENTO actualizar_nota()
+        LEER nombre
+        SI nombre ∈ nombres ENTONCES
+            LEER nueva_nota
+            SI nueva_nota ≥ 0 Y nueva_nota ≤ 100 ENTONCES
+                indice ← posición de nombre en nombres
+                notas[indice] ← nueva_nota
+                MOSTRAR "Nota actualizada correctamente."
+            SINO
+                MOSTRAR "La nota debe estar entre 0 y 100."
+            FIN SI
+        SINO
+            MOSTRAR "No se ha podido encontrar el curso."
+        FIN SI
+    FIN PROCEDIMIENTO
+
+FIN
+
+Codigo en Python
+
+
+# 0. Menú principal
+# Nos permite seleccionar la opción deseada.
+# Estructuras usadas: while, if-elif-else, funciones.
+def menu():
+    while True:
+        print("\n====== GESTOR DE NOTAS ======")
+        print("1. Registrar nuevo curso")
+        print("2. Mostrar todos los cursos y notas")
+        print("3. Calcular promedio general")
+        print("4. Contar cursos aprobados y reprobados")
+        print("5. Buscar curso por nombre")
+        print("6. Actualizar nota de un curso")
+        print("7. Eliminar un curso")
+        print("8. Ordenar cursos por nota")
+        print("9. Ordenar cursos por nombre")
+        print("10. Buscar curso por nombre")
+        print("11. Salir")
+
+        opcion = input("Elija una opcion: ")
+
+        if opcion == "1 ":
+            registrar_curso()
+        elif opcion == "2":
+            mostrar_cursos()
+        elif opcion == "3":
+            calcular_promedio()
+        elif opcion == "4 ":
+            contar_aprobados_reprobados()
+        elif opcion == "5":
+            buscar_curso_lineal()
+        elif opcion == "6":
+            actualizar_nota()
+        elif opcion == "7":
+            eliminar_curso()
+        elif opcion == "8":
+            ordenar_por_nota()
+        elif opcion == "9 ":
+            ordenar_por_nombre()
+        elif opcion == "10 ":
+            buscar_curso_binario()
+        elif opcion == "11":
+            print("Saliendo del sistema")
+            break
+        else:
+            print("Opción inválida.")
+
+# 2. Mostrar cursos registrados
+# Si no hay cursos, lo indica. Si existen, los recorre con un bucle for.
+
+nombres = []
+notas = []
+
+def registrar_curso():
+    nombre = input("Ingresar nombre del curso: ")
+    if nombre in nombres:
+        print("Este curso ya se ha registrado.")
+        return
+    try:
+        nota = float(input("Ingrese la nota obtenida (0-100): "))
+        if 0 <= nota <= 100:
+            nombres.append(nombre)
+            notas.append(nota)
+            print("El curso se registro con éxito.")
+        else:
+            print("La nota debe estar entre 0 y 100.")
+    except ValueError:
+        print("Ingrese un valor numérico válido.")
+    
+# 2. Mostrar cursos registrados
+# Si no hay cursos, lo indica. Si existen, los recorre con un bucle for.
+
+def mostrar_cursos():
+    if not nombres:
+        print("No hay cursos registrados")
+    else:
+        print("\nCursos registrados:")
+        for i in range(len(nombres)):
+            print(f"{i+1}. {nombres[i]} - Nota: {notas[i]}")
+
+# 3. Calcular promedio general
+# Suma todas las notas y las divide entre la cantidad de cursos.
+# Usa f-string con formato .2f para mostrar 2 decimales.
+
+def calcular_promedio():
+    if not notas:
+        print("No se han registrados cursos.")
+    else:
+        promedio = sum(notas) / len(notas)
+        print(f"Promedio general: {promedio:.2f}")
+
+# 4. Contar cursos aprobados y reprobados
+# Considera aprobado si la nota >= 60.
+# Usa un bucle for y condicionales if-else.
+
+def contar_aprobados_reprobados():
+    if not notas:
+        print("No se han registrados cursos.")
+    else:
+        aprobados = 0
+        reprobados = 0
+        for nota in notas:
+            if nota >= 60:
+                aprobados += 1
+            else:
+                reprobados += 1
+        print(f"Cursos aprobados: {aprobados}")
+        print(f"Cursos reprobados: {reprobados}")
+
+
+# 5. Búsqueda lineal de curso
+# Solicita el nombre del curso, convierte a minúsculas y busca coincidencias parciales.
+# Si lo encuentra, lo muestra. Si no, informa que no existe.
+
+def buscar_curso_lineal():
+    nombre = input("Ingrese el nombre del curso: ").strip().lower()
+    for i in range(len(nombres)):
+        if nombre in nombres[i].lower():
+            print(f"Curso encontrado: {nombres[i]} - Nota: {notas[i]}")
+            return
+    print("Curso no encontrado.")
+
+# 6. Actualizar nota de un curso
+# Solicita el nombre del curso y una nueva nota (validada entre 0 y 100).
+# Si lo encuentra, reemplaza la nota en la lista.
+
+def actualizar_nota():
+    nombre = input("Ingrese el nombre del curso: ")
+    if nombre in nombres:
+        try:
+            nueva_nota = float(input("Ingrese la nueva nota (0-100): "))
+            if 0 <= nueva_nota <= 100:
+                indice = nombres.index(nombre)
+                notas[indice] = nueva_nota
+                print(" Nota actualizada correctamente.")
+            else:
+                print("La nota debe ser entre 0 y 100.")
+        except ValueError:
+            print("Ingrese un dato numérico válido.")
+    else:
+        print("No se ha podido encontrar el curso.")
